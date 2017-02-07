@@ -37,18 +37,28 @@ int main(int argc, char *argv[])
     // Display the game introduction and initialize the questions
     initialize_game();
 
+    printf("Welcome to a cheap rendition of jeprody *sigh*.\n");
+
     for(int i=1; i<=NUM_PLAYERS; i++)
     {
-        printf("Enter name of player %d\n", i);
-        scanf("%s", players[i].name);
+        printf("Yo, Player %d, enter a name (and try not to embarrass yourself)\n", i);
+        fgets(players[i].name, BUFFER_LEN, stdin);
+        if (players[i].name[strlen(players[i].name)-1] == '\n') {
+            players[i].name[strlen(players[i].name)-1] = '\0';
+        }
+        while (player_exists(players, i, players[i].name))
+        {
+            printf("Name exists (but I'm pretty sure you knew that). Please be at least sligthly more original.\n");
+            fgets(players[i].name, BUFFER_LEN, stdin);
+            if (players[i].name[strlen(players[i].name)-1] == '\n') {
+            players[i].name[strlen(players[i].name)-1] = '\0';
+        }
+        }
     }
 
     for(int i=1; i<=NUM_PLAYERS; i++)
     
         printf("%s\n", players[i].name);
-    // Prompt for players names
-    
-    // initialize each of the players in the array
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
