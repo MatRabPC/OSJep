@@ -50,6 +50,14 @@ int main(int argc, char *argv[])
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
+        if (buffer[strlen(buffer)-1] == '\n') {
+            buffer[strlen(buffer)-1] = '\0';
+        }
+        
+        if (strcmp(buffer, "quit") == 0)
+        {
+            return EXIT_SUCCESS;
+        }
         // Call functions from the questions and players source files
 
         // Execute the game until all questions are answered
