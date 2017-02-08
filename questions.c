@@ -20,6 +20,15 @@ void initialize_game(void)
 void display_categories(void)
 {
     // print categories and dollar values for each unanswered question in questions array
+    printf("Available catergories are: %s, %s, %s .", categories[0], categories[1], categories[2]);
+        scanf("Which catergory do you choose? %s", category);
+        
+        for (int i = 0; i<4; i++){
+            if (category == categories[i]){
+                return category;
+            }
+        
+        }
 }
 
 // Displays the question for the category and dollar value

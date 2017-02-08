@@ -28,6 +28,8 @@ void show_results(player *players, int num_players);
 
 int main(int argc, char *argv[])
 {
+    display_categories();
+
     // An array of 4 players, may need to be a pointer if you want it set dynamically
     player players[NUM_PLAYERS];
     
@@ -37,14 +39,16 @@ int main(int argc, char *argv[])
     // Display the game introduction and initialize the questions
     initialize_game();
 
-    // Prompt for players names
     
+    // Prompt for players names
+
     // initialize each of the players in the array
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
         // Call functions from the questions and players source files
+        
 
         // Execute the game until all questions are answered
 
