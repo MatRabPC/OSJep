@@ -84,8 +84,9 @@ int main(int argc, char *argv[])
             return EXIT_SUCCESS;
         }
 
-if (strcmp(buffer, "start") == 0)
+        if (strcmp(buffer, "start") == 0)
         {
+            printf("This works you are not crazy");
             display_categories();
         }
         
