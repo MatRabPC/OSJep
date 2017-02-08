@@ -39,12 +39,12 @@ int main(int argc, char *argv[])
     // Display the game introduction and initialize the questions
     initialize_game();
 
-<<<<<<< HEAD
+
     
     // Prompt for players names
 
     // initialize each of the players in the array
-=======
+display_categories();
     printf("Welcome to a cheap rendition of jeprody *sigh*.\n");
 
     for(int i=1; i<=NUM_PLAYERS; i++)
@@ -64,10 +64,11 @@ int main(int argc, char *argv[])
         }
     }
 
-    for(int i=1; i<=NUM_PLAYERS; i++)
+    for(int i=1; i<=NUM_PLAYERS; i++){
     
         printf("%s\n", players[i].name);
->>>>>>> 659f9d4a7bbb39ef9d2e29b285f023857caea7b1
+        
+    }
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
@@ -83,7 +84,7 @@ int main(int argc, char *argv[])
         }
 
         // Call functions from the questions and players source files
-        
+      
 
         // Execute the game until all questions are answered
 
