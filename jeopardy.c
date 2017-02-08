@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     // Prompt for players names
 
     // initialize each of the players in the array
-display_categories();
+
     printf("Welcome to a cheap rendition of jeprody *sigh*.\n");
 
     for(int i=1; i<=NUM_PLAYERS; i++)
@@ -67,6 +67,7 @@ display_categories();
     for(int i=1; i<=NUM_PLAYERS; i++){
     
         printf("%s\n", players[i].name);
+
         
     }
 
@@ -82,6 +83,12 @@ display_categories();
         {
             return EXIT_SUCCESS;
         }
+
+if (strcmp(buffer, "start") == 0)
+        {
+            display_categories();
+        }
+        
 
         // Call functions from the questions and players source files
       
