@@ -22,15 +22,35 @@
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
 void tokenize(char *input, char **tokens);
 
+int winner();
+
 // Displays the game results for each player, their name and final score, ranked from first to last place
 void show_results(player *players, int num_players);
 
+int winner(player *players)
+{
+int max = 0;
+int best = 0;
+int i = 1;
+for (i = 1; i <=NUM_PLAYERS; i++)
+{
+if (&players[i].score > max)
+{
+max = &players[i].score;
+best = i;
+}
+
+}
+
+return best;
+}
 
 int main(int argc, char *argv[])
 {
     // An array of 4 players, may need to be a pointer if you want it set dynamically
-    player players[NUM_PLAYERS];
+    player players[NUM_PLAYERS+1];
     
+int qsleft = NUM_QUESTIONS; //track number of questions left
     // Input buffer and and commands
     char buffer[BUFFER_LEN] = { 0 };
 
@@ -119,22 +139,34 @@ strcpy(much, token);
 				printf("Try something more in your league.\n");
 		else printf("Wut\n");
 	}
-if (playah == NUM_PLAYERS)
+if (qsleft)
 {
-printf("Let's show them the leaderboard: (imagine a leaderboard)\nNew round, let's get this over with.");
-getchar();
-playah = 1;
-}
+qsleft--;
+printf("Qs left: %d\n", qsleft); 
+	if (playah == NUM_PLAYERS)
+	{
+	printf("Let's show them the leaderboard: (imagine a leaderboard)\nNew round, let's get this over with.");
+	getchar();
+	playah = 1;
+	}
 
-else
-{	
+	else
+	{	
 	printf("So we have %s with %d points, kapiche?\n", players[playah].name, players[playah].score);
 	printf("Let's go to the next player");
 playah += 1;
 getchar();//pause
-}
+	}
 	system("clear");//clear screen
+	
         break;
+}
+else
+{
+
+printf("Game over, the winner is %s with %d points\n", players[winner(players)].name, players[winner(players)].score);
+return EXIT_SUCCESS;
+}
         //prompt dollar amount question
       }
     //  else
