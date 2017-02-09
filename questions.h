@@ -34,7 +34,7 @@ typedef struct {
 
 // An array of 12 questions (4 for each category), initialized in initialize_game
 // this may need to be a pointer if you want it set dynamically
-question q[NUM_QUESTIONS] = {
+question qs[NUM_QUESTIONS] = {
 
 {
     "Beatles",

@@ -21,12 +21,22 @@ void initialize_game(void)
 void display_categories(void)
 {
     // print categories and dollar values for each unanswered question in questions array
-    printf("On the menu tonight: ");
-    for (int i = 0; i <= 3; i++){
-        if (q[0+i].answered || q[1+i].answered || q[2+i].answered || q[3+i].answered == false){
-            printf ("%s", categories[i]);
-        }
+    printf("On the menu tonight:\n ");
+    for (int i = 0; i < 3; i++)
+    {
+        if (qs[0+i].answered || qs[1+i].answered || qs[2+i].answered || qs[3+i].answered == false)
+        {
+            printf ("%s for  ", categories[i]);
 
+                for (int j = 0; j < 4; j++)
+                {
+                    if (qs[j + 4*i ].answered == false)
+                    {
+                        printf("%d ", qs[i+j].value);
+                    }
+                }
+        }
+        printf("\n"); //this spacing is necessary, it was getting on my nerves
     }
     
     printf("Pick your poison\n");

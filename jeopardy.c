@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
   
   fgets(buffer, BUFFER_LEN, stdin);
 
-  for(int j = 0; j <= 3; j++){
+  for(int j = 0; j < 3; j++){
       if (strcmp(buffer, categories[j]) == 0){ // ***********String compare broken?
       //if category exists, set buffer to *category for display_question
         printf("I hope you know a lot about %s\n", categories[j]); 
@@ -81,10 +81,6 @@ int main(int argc, char *argv[])
       printf("%s uh oh, not found\n", categories[j]);
 
   }
-
- 
-
-     
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
