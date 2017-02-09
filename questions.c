@@ -122,7 +122,7 @@ void display_categories(void)
     printf("On the menu tonight:\n");
     for (int i = 0; i < 3; i++)
     {
-        if (quest[0+i].answered || quest[1+i].answered || quest[2+i].answered || quest[3+i].answered == false)
+        if (!quest[0+i].answered || !quest[1+i].answered || !quest[2+i].answered || !quest[3+i].answered)
         {
             printf ("%-5s %-5s\t", categories[i], "for");
  
@@ -132,7 +132,7 @@ void display_categories(void)
                     {
                         printf("%-2d \t", quest[i*4 +j].value);
                     }
-			else printf("%-2s\t", " ");
+			else printf("%-2s\t", "ANS");
                 }
         }
         printf("\n"); //this spacing is necessary, it was getting on my nerves
@@ -150,7 +150,9 @@ for (int i=0; i<NUM_QUESTIONS; i++)
 {
 if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
 {
-printf("\033[1;34m%s\033[0m\n", quest[i].question);
+printf("\033[1;34m\t\t%s\033[0m\n", quest[i].question);
+quest[i].answered = true; //we might as well mark it here
+break; //this might fix something
 }
 }
 }
