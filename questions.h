@@ -34,12 +34,12 @@ typedef struct {
 
 // An array of 12 questions (4 for each category), initialized in initialize_game
 // this may need to be a pointer if you want it set dynamically
-question qs[NUM_QUESTIONS] = {
+question q[NUM_QUESTIONS] = {
 
 {
     "Beatles",
     "This one was married to Yoko Ono",
-    "John",
+    "JOHN",
     100,
     false
 },
@@ -47,7 +47,7 @@ question qs[NUM_QUESTIONS] = {
 {
     "Beatles",
     "This one played bass",
-    "Paul",
+    "PAUL",
     200,
     false
 },
@@ -55,7 +55,7 @@ question qs[NUM_QUESTIONS] = {
 {
     "Beatles",
     "This one died in 1966",
-    "Paul",
+    "PAUL",
     300,
     false
 },
@@ -63,7 +63,7 @@ question qs[NUM_QUESTIONS] = {
 {
     "Beatles",
     "This one lifts 850 times its body mass",
-    "Hercules",
+    "HERCULES",
     400,
     false
 },
@@ -71,14 +71,14 @@ question qs[NUM_QUESTIONS] = {
 {
     "Insects",
     "This one spins a web",
-    "Spider",
+    "SPIDER",
     100,
     false
 },
 {
     "Insects",
     "This one is named after its mode of transportation",
-    "Fly",
+    "FLY",
     200,
     false
 },
@@ -86,7 +86,7 @@ question qs[NUM_QUESTIONS] = {
 {
     "Insects",
     "This one crawls on the ground",
-    "Worm",
+    "WORM",
      300,
     false
 },
@@ -94,7 +94,7 @@ question qs[NUM_QUESTIONS] = {
 {
     "Insects",
     "This one is not margerine and doesn't walk",
-    "Butterfly",
+    "BUTTERFLY",
     400,
     false
 },
@@ -126,7 +126,7 @@ question qs[NUM_QUESTIONS] = {
 {
     "Bugs",
     "Name in Hyrule",
-    "Error",
+    "ERROR",
     400,
     false
 }

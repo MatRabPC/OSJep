@@ -14,20 +14,29 @@
 void initialize_game(void)
 {
     // initialize each question struct and assign it to the questions array
+  
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
 void display_categories(void)
 {
     // print categories and dollar values for each unanswered question in questions array
-    printf("On the menu tonight: %s, %s, %s .\nPick your poison\n", categories[0], categories[1], categories[2]);
-        
+    printf("On the menu tonight: ");
+    for (int i = 0; i <= 3; i++){
+        if (q[0+i].answered || q[1+i].answered || q[2+i].answered || q[3+i].answered == false){
+            printf ("%s", categories[i]);
+        }
+
+    }
+    
+    printf("Pick your poison\n");
+    
 }
 
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
 {
-
+   
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value

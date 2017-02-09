@@ -28,8 +28,6 @@ void show_results(player *players, int num_players);
 
 int main(int argc, char *argv[])
 {
-    //display_categories();
-
     // An array of 4 players, may need to be a pointer if you want it set dynamically
     player players[NUM_PLAYERS];
     
@@ -38,13 +36,10 @@ int main(int argc, char *argv[])
 
     // Display the game introduction and initialize the questions
     initialize_game();
-
-    // Prompt for players names
-
-    // initialize each of the players in the array
-
     printf("Welcome to a cheap rendition of jeprody *sigh*.\n");
 
+
+    // Prompt for players names & initialize each of the players in the array
     for(int i=1; i<=NUM_PLAYERS; i++)
     {
         printf("Yo, Player %d, enter a name (and try not to embarrass yourself)\n", i);
@@ -68,7 +63,28 @@ int main(int argc, char *argv[])
     
     }
 
+
+//display categories and value amounts
   display_categories();
+  
+  //Accept input to choose category
+  
+  fgets(buffer, BUFFER_LEN, stdin);
+
+  for(int j = 0; j <= 3; j++){
+      if (strcmp(buffer, categories[j]) == 0){ // ***********String compare broken?
+      //if category exists, set buffer to *category for display_question
+        printf("I hope you know a lot about %s\n", categories[j]); 
+        //prompt dollar amount question
+      }
+      else
+      printf("%s uh oh, not found\n", categories[j]);
+
+  }
+
+ 
+
+     
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
@@ -83,15 +99,9 @@ int main(int argc, char *argv[])
             return EXIT_SUCCESS;
         }
 
-        
-        
-        
-
-      
 
         // Call functions from the questions and players source files
       
-
         // Execute the game until all questions are answered
 
         // Display the final results and exit
