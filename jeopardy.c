@@ -39,8 +39,6 @@ int main(int argc, char *argv[])
     // Display the game introduction and initialize the questions
     initialize_game();
 
-
-    
     // Prompt for players names
 
     // initialize each of the players in the array
@@ -67,9 +65,10 @@ int main(int argc, char *argv[])
     for(int i=1; i<=NUM_PLAYERS; i++){
     
         printf("%s\n", players[i].name);
-
-        
+    
     }
+
+  display_categories();
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
@@ -84,12 +83,11 @@ int main(int argc, char *argv[])
             return EXIT_SUCCESS;
         }
 
-        if (strcmp(buffer, "start") == 0)
-        {
-            printf("This works you are not crazy");
-            display_categories();
-        }
         
+        
+        
+
+      
 
         // Call functions from the questions and players source files
       
