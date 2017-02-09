@@ -31,7 +31,7 @@ question quest[NUM_QUESTIONS] = {
 {
     "Beatles",
     "This one died in 1966",
-    "PAUL", //Paul or his replacement?
+    "PAUL", 
     300,
     false
 },
@@ -119,32 +119,40 @@ void initialize_game(void)
 void display_categories(void)
 {
     // print categories and dollar values for each unanswered question in questions array
-    printf("On the menu tonight:\n ");
+    printf("On the menu tonight:\n");
     for (int i = 0; i < 3; i++)
     {
         if (quest[0+i].answered || quest[1+i].answered || quest[2+i].answered || quest[3+i].answered == false)
         {
-            printf ("%s for  ", categories[i]);
+            printf ("%-5s %-5s\t", categories[i], "for");
  
                 for (int j = 0; j < 4; j++)
                 {
                     if (quest[i*4 + j].answered == false)
                     {
-                        printf("%d ", quest[i*4 +j].value);
+                        printf("%-2d \t", quest[i*4 +j].value);
                     }
+			else printf("%-2s\t", " ");
                 }
         }
         printf("\n"); //this spacing is necessary, it was getting on my nerves
     }
     
-    printf("Pick your poison\n");
+    printf("Pick your poison: ");
     
 }
 
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
 {
-   
+   printf("%s  %d\n", category, value);
+for (int i=0; i<NUM_QUESTIONS; i++)
+{
+if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
+{
+printf("%s\n", quest[i].question);
+}
+}
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
