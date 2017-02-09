@@ -10,6 +10,104 @@
 #include <string.h>
 #include "questions.h"
 
+question quest[NUM_QUESTIONS] = {
+
+{
+    "Beatles",
+    "This one was married to Yoko Ono",
+    "JOHN",
+    100,
+    false
+},
+
+{
+    "Beatles",
+    "This one played bass",
+    "PAUL",
+    200,
+    false
+},
+
+{
+    "Beatles",
+    "This one died in 1966",
+    "PAUL", //Paul or his replacement?
+    300,
+    false
+},
+
+{
+    "Beatles",
+    "This one lifts 850 times its body mass",
+    "HERCULES",
+    400,
+    false
+},
+
+{
+    "Insects",
+    "This one spins a web",
+    "SPIDER",
+    100,
+    false
+},
+{
+    "Insects",
+    "This one is named after its mode of transportation",
+    "FLY",
+    200,
+    false
+},
+
+{
+    "Insects",
+    "This one crawls on the ground",
+    "WORM",
+     300,
+    false
+},
+
+{
+    "Insects",
+    "This one is not margerine and doesn't walk",
+    "BUTTERFLY",
+    400,
+    false
+},
+
+{
+    "Bugs",
+    "Number when page not found",
+    "404",
+    100,
+    false
+},
+
+{
+    "Bugs",
+    "I couldn't think of another one",
+"404",
+    200,
+    false
+},
+
+{
+    "Bugs",
+     "I couldn't think of one more'",
+  "404",
+    300,
+    false
+},
+
+{
+    "Bugs",
+    "Name in Hyrule",
+    "ERROR",
+    400,
+    false
+}
+};
+
 // Initializes the array of questions for the game
 void initialize_game(void)
 {
@@ -24,15 +122,15 @@ void display_categories(void)
     printf("On the menu tonight:\n ");
     for (int i = 0; i < 3; i++)
     {
-        if (qs[0+i].answered || qs[1+i].answered || qs[2+i].answered || qs[3+i].answered == false)
+        if (quest[0+i].answered || quest[1+i].answered || quest[2+i].answered || quest[3+i].answered == false)
         {
             printf ("%s for  ", categories[i]);
-
+ 
                 for (int j = 0; j < 4; j++)
                 {
-                    if (qs[i*4 + j].answered == false)
+                    if (quest[i*4 + j].answered == false)
                     {
-                        printf("%d ", qs[i*4 +j].value);
+                        printf("%d ", quest[i*4 +j].value);
                     }
                 }
         }
