@@ -15,7 +15,7 @@
 
 // Put macros or constants here using #define
 #define BUFFER_LEN 256
-#define NUM_PLAYERS 4
+#define NUM_PLAYERS 2
 
 // Put global environment variables here
 
@@ -57,11 +57,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    for(int i=1; i<=NUM_PLAYERS; i++){
-    
-        printf("%s\n", players[i].name);
-    
-    }
+  //  for(int i=1; i<=NUM_PLAYERS; i++){  printf("%s\n", players[i].name); }
 
 
 //display categories and value amounts
@@ -70,11 +66,12 @@ int main(int argc, char *argv[])
   //Accept input to choose category
   
   fgets(buffer, BUFFER_LEN, stdin);
-
+buffer[strlen(buffer)-1] = '\0';
   for(int j = 0; j < 3; j++){
       if (strcmp(buffer, categories[j]) == 0){ // ***********String compare broken?
       //if category exists, set buffer to *category for display_question
         printf("I hope you know a lot about %s\n", categories[j]); 
+        break;
         //prompt dollar amount question
       }
       else
