@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     initialize_game();
     printf("Welcome to a cheap rendition of jeprody *sigh*.\n");
 
-
+/*
     // Prompt for players names & initialize each of the players in the array
     for(int i=1; i<=NUM_PLAYERS; i++)
     {
@@ -59,18 +59,27 @@ int main(int argc, char *argv[])
 
   //  for(int i=1; i<=NUM_PLAYERS; i++){  printf("%s\n", players[i].name); }
 
-
+*/
 //display categories and value amounts
   display_categories();
   
   //Accept input to choose category
-  
-  fgets(buffer, BUFFER_LEN, stdin);
+char cat[BUFFER_LEN] = { 0 };
+char much[BUFFER_LEN] = { 0 };
+char *token;
+
+fgets(buffer, BUFFER_LEN, stdin);
 buffer[strlen(buffer)-1] = '\0';
+token = strtok(buffer, " ");
+strcpy(cat, token);
+token = strtok(NULL, " ");
+strcpy(much, token);
+
   for(int j = 0; j < 3; j++){
-      if (strcmp(buffer, categories[j]) == 0){ // ***********String compare broken?
+      if (strcmp(cat, categories[j]) == 0){ 
       //if category exists, set buffer to *category for display_question
-        printf("I hope you know a lot about %s\n", categories[j]); 
+        printf("I hope you know a lot about %s. We've got %s on the line\n", categories[j], much); 
+	display_question(&categories[j], atoi(much));
         break;
         //prompt dollar amount question
       }
