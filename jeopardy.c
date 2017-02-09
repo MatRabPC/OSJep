@@ -15,7 +15,7 @@
 
 // Put macros or constants here using #define
 #define BUFFER_LEN 256
-#define NUM_PLAYERS 2
+#define NUM_PLAYERS 4
 
 // Put global environment variables here
 
@@ -76,15 +76,41 @@ token = strtok(NULL, " ");
 strcpy(much, token);
 
   for(int j = 0; j < 3; j++){
-      if (strcmp(cat, categories[j]) == 0){ 
+      if ( (strcmp(cat, categories[j]) == 0) ){ 
       //if category exists, set buffer to *category for display_question
         printf("I hope you know a lot about %s. We've got %s on the line\n", categories[j], much); 
 	display_question(&categories[j], atoi(much));
+	fgets(buffer, BUFFER_LEN, stdin);
+	buffer[strlen(buffer)-1] = '\0';
+	if (valid_answer(&categories[j], atoi(much), buffer))
+	{
+		if (atoi(much) == 100)
+			printf("Pfft, too easy\n");
+		else if (atoi(much) == 200)
+				printf("That wasn't that hard\n");
+		else if (atoi(much) == 300)
+				printf("Fine, you win this one\n");
+		else if (atoi(much) == 400)
+				printf("I'm impressed you got that. But that wasn't a compliment\n");
+		else printf("Wut\n");
+	}
+	else
+	{
+		if (atoi(much) == 100)
+			printf("Couldn't even get that?\n");
+		else if (atoi(much) == 200)
+				printf("Nope.\n");
+		else if (atoi(much) == 300)
+				printf("Try again. Not.\n");
+		else if (atoi(much) == 400)
+				printf("Try something more in your league.\n");
+		else printf("Wut\n");
+	}
         break;
         //prompt dollar amount question
       }
-      else
-      printf("%s uh oh, not found\n", categories[j]);
+    //  else
+     // printf("%s uh oh, not found\n", categories[j]); //We shouldnt print the missed cats
 
   }
 
