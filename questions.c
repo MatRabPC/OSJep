@@ -30,9 +30,9 @@ void display_categories(void)
 
                 for (int j = 0; j < 4; j++)
                 {
-                    if (qs[j + 4*i ].answered == false)
+                    if (qs[i*4 + j].answered == false)
                     {
-                        printf("%d ", qs[i+j].value);
+                        printf("%d ", qs[i*4 +j].value);
                     }
                 }
         }
