@@ -15,7 +15,7 @@
 
 // Put macros or constants here using #define
 #define BUFFER_LEN 256
-#define NUM_PLAYERS 4
+#define NUM_PLAYERS 3
 
 // Put global environment variables here
 
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     initialize_game();
     printf("Welcome to a cheap rendition of jeprody *sigh*.\n");
 
-/*
+
     // Prompt for players names & initialize each of the players in the array
     for(int i=1; i<=NUM_PLAYERS; i++)
     {
@@ -55,21 +55,32 @@ int main(int argc, char *argv[])
             players[i].name[strlen(players[i].name)-1] = '\0';
         }
         }
+	players[i].score = 0;
     }
+system("clear");
 
   //  for(int i=1; i<=NUM_PLAYERS; i++){  printf("%s\n", players[i].name); }
 
-*/
+
 //display categories and value amounts
-  display_categories();
+  
   
   //Accept input to choose category
 char cat[BUFFER_LEN] = { 0 };
 char much[BUFFER_LEN] = { 0 };
 char *token;
+int playah = 1;
 
+while (1)
+{
+printf("A'right, %s. \n", players[playah].name);
+display_categories();
 fgets(buffer, BUFFER_LEN, stdin);
 buffer[strlen(buffer)-1] = '\0';
+if (strcmp(buffer, "quit") == 0)
+        {
+            return EXIT_SUCCESS;
+        }
 token = strtok(buffer, " ");
 strcpy(cat, token);
 token = strtok(NULL, " ");
@@ -78,21 +89,23 @@ strcpy(much, token);
   for(int j = 0; j < 3; j++){
       if ( (strcmp(cat, categories[j]) == 0) ){ 
       //if category exists, set buffer to *category for display_question
-        printf("I hope you know a lot about %s. We've got %s on the line\n", categories[j], much); 
+        printf("I hope you know a lot about %s. We've got %s on the line.\n", categories[j], much); 
 	display_question(&categories[j], atoi(much));
 	fgets(buffer, BUFFER_LEN, stdin);
 	buffer[strlen(buffer)-1] = '\0';
 	if (valid_answer(&categories[j], atoi(much), buffer))
 	{
 		if (atoi(much) == 100)
-			printf("Pfft, too easy\n");
+			printf("Pfft, too easy.\n");
 		else if (atoi(much) == 200)
-				printf("That wasn't that hard\n");
+				printf("That wasn't that hard.\n");
 		else if (atoi(much) == 300)
-				printf("Fine, you win this one\n");
+				printf("Fine, you win this one.\n");
 		else if (atoi(much) == 400)
-				printf("I'm impressed you got that. But that wasn't a compliment\n");
+				printf("I'm impressed you got that. But that wasn't a compliment.\n");
 		else printf("Wut\n");
+		
+		update_score(players, playah, much); //not working
 	}
 	else
 	{
@@ -106,6 +119,21 @@ strcpy(much, token);
 				printf("Try something more in your league.\n");
 		else printf("Wut\n");
 	}
+if (playah == NUM_PLAYERS)
+{
+printf("Let's show them the leaderboard: (imagine a leaderboard)\nNew round, let's get this over with.");
+getchar();
+playah = 1;
+}
+
+else
+{	
+	printf("So we have %s with %d points, kapiche?\n", players[playah].name, players[playah].score);
+	printf("Let's go to the next player");
+playah += 1;
+getchar();//pause
+}
+	system("clear");//clear screen
         break;
         //prompt dollar amount question
       }
@@ -113,6 +141,8 @@ strcpy(much, token);
      // printf("%s uh oh, not found\n", categories[j]); //We shouldnt print the missed cats
 
   }
+
+}
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
