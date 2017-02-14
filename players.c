@@ -26,7 +26,6 @@ bool player_exists(player *players, int num_players, char *name)
 // Go through the list of players and update the score for the 
 // player given their name
 void update_score(player *players, int num_players, int score)
-{printf("before %d", players[num_players].score);
-    players[num_players].score += score;
-	printf("\tafter %d\n", players[num_players].score);
+{
+    	players[num_players].score += score;
 }
