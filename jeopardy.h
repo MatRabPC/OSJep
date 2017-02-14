@@ -14,7 +14,7 @@
 extern void tokenize(char *input, char **tokens);
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
-extern void show_results(player *players, int num_players);
+extern void show_results(player *players);
 
 // Return winner's index
 extern int winner(player *players);
