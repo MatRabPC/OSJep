@@ -125,7 +125,7 @@ strcpy(much, token);
 				printf("I'm impressed you got that. But that wasn't a compliment.\n");
 		else printf("Wut\n");
 		
-		update_score(players, playah, much); //not working
+		update_score(players, playah, atoi(much)); //not working
 	}
 	else
 	{
@@ -142,7 +142,7 @@ strcpy(much, token);
 if (qsleft)
 {
 qsleft--;
-printf("Qs left: %d\n", qsleft); 
+//printf("Qs left: %d\n", qsleft); 
 	if (playah == NUM_PLAYERS)
 	{
 	printf("Let's show them the leaderboard: (imagine a leaderboard)\nNew round, let's get this over with.");
