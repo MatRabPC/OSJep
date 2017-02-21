@@ -14,7 +14,7 @@
 #include "jeopardy.h"
 
 #define BUFFER_LEN 256
-#define NUM_PLAYERS 3
+#define NUM_PLAYERS 4
 
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
@@ -35,16 +35,22 @@ int main()
     
     // Input buffer and and commands
     char buffer[BUFFER_LEN] = { 0 };
+    char tokenslot[BUFFER_LEN] = { 0 };
 
     // Display the game introduction and initialize the questions
     initialize_game();
 
-    printf("Welcome to a cheap rendition of jeopardy *sigh*.\n");
+    printf("Welcome to a cheap rendition of jeopardy *sigh*.\n"
+	 "Quick rundown of the rules: \n"
+	 "1. To select a quetion, type the category and the value (i.e, Bugs 200).\n"
+	 "2. Answer in all caps, in 'WHO IS' or 'WHAT IS'. We really don't care which.\n"
+	 "3. Don't expect anything special. Ain't nobody got time for special.\n");
 
+    printf("\nAll right players, introduce yourselves (and try not to embarrass yourself):\n");
     // Prompt for players names & initialize each of the players in the array
     for(int i=1; i<=NUM_PLAYERS; i++)
     {
-        printf("Yo, Player %d, enter a name (and try not to embarrass yourself)\n", i);
+        printf("Player %d?\t", i);
         fgets(players[i].name, BUFFER_LEN, stdin);
         
         while (player_exists(players, i, players[i].name))
@@ -68,99 +74,108 @@ int main()
     int value = 0;
     char *token;
     int playah = 1;
+    int j = -1;
 
     while (1) //actual game part
     {
-        printf("A'right, %s. \n", players[playah].name);
+        j = -1;
+        value = 0;
+        printf("Up to the playing field, we have %s. \n", players[playah].name);
         display_categories();
         fgets(buffer, BUFFER_LEN, stdin);
+        //if (valid_answer(&categories[0], 100, buffer)) printf("we're getting somewhere\n");
         buffer[strlen(buffer)-1] = '\0';
-        
-        if (strcmp(buffer, "quit") == 0)
-            {
-                return EXIT_SUCCESS; //DEBUG
-            }
-        
         token = strtok(buffer, " ");
         strcpy(cat, token);
         token = strtok(NULL, " ");
         value = atoi(token);
-
-        for(int j = 0; j < 3; j++) 
+     //   printf("NOT HERE\n");
+        
+        for(int jj = 0; jj < 3; jj++) 
         {
 
-            if ( (strcmp(cat, categories[j]) == 0) ){ 
-            //if category exists, set buffer to *category for display_question
-                printf("I hope you know a lot about %s. We've got %d on the line.\n", categories[j], value); 
-                display_question(&categories[j], value);
-                fgets(buffer, BUFFER_LEN, stdin);
-                buffer[strlen(buffer)-1] = '\0';
+            if ( (strcmp(cat, categories[jj]) == 0) ){ 
 
-            if (valid_answer(&categories[j], value, buffer))
-            {
-                if (value == 100)
-                    printf("Pfft, too easy.\n");
-                else if (value == 200)
-                        printf("That wasn't that hard.\n");
-                else if (value == 300)
-                        printf("Fine, you win this one.\n");
-                else if (value == 400)
-                        printf("I'm impressed you got that. But that wasn't a compliment.\n");
-                else printf("Wut\n");
-                
-                update_score(players, playah, value); 
+            //if category exists, set buffer to *category for display_question
+                printf("I hope you know a lot about %s. We've got %d on the line.\n", categories[jj], value); 
+                j = jj;
+                //printf("NOT HERE\n");
             }
+           // printf("NOT HERE\n");
+        } 
+        if (j == -1)
+        {
+            printf("Didn't quite catch that. ");
+            continue;
+        }   //ie, redo the above without executing the below if we cant decipher the input
+        
+	
+        display_question(&categories[j], value);
+        fgets(buffer, BUFFER_LEN, stdin);
+        buffer[strlen(buffer)-1] = '\0';
+
+        if (valid_answer(&categories[j], value, buffer)) //right answer
+        {
+                    if (value == 100)
+                        printf("Pfft, too easy.\n");
+                    else if (value == 200)
+                            printf("That wasn't that hard.\n");
+                    else if (value == 300)
+                            printf("Fine, you win this one.\n");
+                    else if (value == 400)
+                            printf("I'm impressed you got that. But that wasn't a compliment.\n");
+                    else printf("Wut\n");
+                    
+                    update_score(players, playah, value); 
+        }
+
+        else //wrong answer
+        {
+                    if (value == 100)
+                        printf("Couldn't even get that?\n");
+                    else if (value == 200)
+                            printf("Nope.\n");
+                    else if (value == 300)
+                            printf("Try again. Not.\n");
+                    else if (value == 400)
+                            printf("Try something more in your league.\n");
+                    else printf("Wut\n");
+        }
+                
+                // see if there are still questions left
+        if (qsleft)
+        {
+                    qsleft--;
+                    //printf("Qs left: %d\n", qsleft);  //DEBUG
+            if (playah == NUM_PLAYERS)
+                    {
+                        printf("Let's show them the leaderboard: \n");
+                        show_results(players);
+                        printf("New round, let's get this over with.");
+                        fgets(buffer, BUFFER_LEN, stdin); //wait for enter
+                        playah = 1;
+                    }
 
             else
-            {
-                if (value == 100)
-                    printf("Couldn't even get that?\n");
-                else if (value == 200)
-                        printf("Nope.\n");
-                else if (value == 300)
-                        printf("Try again. Not.\n");
-                else if (value == 400)
-                        printf("Try something more in your league.\n");
-                else printf("Wut\n");
-            }
+                    {	
+                        printf("So we have %s with %d points, kapiche?\n", players[playah].name, players[playah].score);
+                        printf("Let's go to the next player");
+                        playah += 1;
+                        fgets(buffer, BUFFER_LEN, stdin); //pause
+                    }
+                
+            system("clear");//clear screen
+                    
+                    }
             
-            // see if there are still questions left
-            if (qsleft)
-            {
-                qsleft--;
-                //printf("Qs left: %d\n", qsleft);  //DEBUG
-                if (playah == NUM_PLAYERS)
+        else //if we run out of questions
                 {
-                    printf("Let's show them the leaderboard: \n");
-                    show_results(players);
-                    printf("New round, let's get this over with.");
-                    fgets(buffer, BUFFER_LEN, stdin); //wait for enter
-                    playah = 1;
+                printf("Game over, the winner is %s with %d points. Congratulations on wasting all that time.\n", players[winner(players)].name, players[winner(players)].score);
+                return EXIT_SUCCESS;
                 }
-
-                else
-                {	
-                    printf("So we have %s with %d points, kapiche?\n", players[playah].name, players[playah].score);
-                    printf("Let's go to the next player");
-                    playah += 1;
-                    fgets(buffer, BUFFER_LEN, stdin); //pause
-                }
-            
-                system("clear");//clear screen
-                
-                }
-        
-            else //if we run out of questions
-            {
-            printf("Game over, the winner is %s with %d points. Congratulations on wasting all that time.\n", players[winner(players)].name, players[winner(players)].score);
-            return EXIT_SUCCESS;
-            }
                 
             }
             
-        }
-
-        }
 
     return EXIT_SUCCESS; // END
 }
@@ -171,6 +186,7 @@ int winner(player *players)
 {
     int max = 0;
 	int best = 0;
+	int tie = 0;
 	
     for (int i = 1; i <=NUM_PLAYERS; i++)
 	{
@@ -178,10 +194,13 @@ int winner(player *players)
 	    {
             max = players[i].score; //...set max to player score
             best = i; //and set player number to best
-        }
+            }
+	    if (players[i].score == max){
+		tie = i;
+		}
 
 	}
-
+	
 	return best; //TODO add tie breaker
 }
 
@@ -195,3 +214,14 @@ void show_results(player *players)
     printf("\n");
  
 }
+
+void tokenize(char *input, char **token)
+{
+  	if (input[strlen(input)-1] == '\n') { input[strlen(input)-1] = '\0'; } //remove newline     
+	char *p = strtok(input, " ");
+	while(p != NULL) {
+	    printf("%s\n", p);
+	    p = strtok(NULL, token);
+	}
+}
+
