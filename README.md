@@ -16,12 +16,12 @@ question categories and displays the dollar values for each question. DONE
 4. The program must accept the name of the person selected to pick the category
 and question.
     ○ You can select the person any way you choose (first person to raise their
-    hand, random selection, etc.).
+    hand, random selection, etc.). IS TURN-BASED OKAY?
     ○ The program must validate that the name of the person entered is correct
     and matches to one of the players.
     
 5. Once the player’s name has been entered the program must prompt the player
-for the category and dollar amount question.
+for the category and dollar amount question. DONE
     ○ The program must verify that the category and dollar amount question has
     not already been answered.
 
@@ -36,14 +36,14 @@ for the category and dollar amount question.
 answer, the player must enter the answer starting with one of the following: what
 is or who is.
     ○ You will need to use string tokenization to parse the answer, use the
-    resources above to help.
+    resources above to help. DONE
     ○ To make the game easier to program you can have every question only
-    required a one word answer.
+    required a one word answer. DONE
     
 8. After the player answers the question the program must display whether they got
 it correct or incorrect.
     ○ If the player answered the question correctly the program must update
-    their score.
+    their score. DONE
     ○ If they answered incorrectly the program will display the answer and no
     user will receive any points.
     ○ The question must then be marked as answered so it cannot be used
