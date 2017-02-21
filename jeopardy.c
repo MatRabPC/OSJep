@@ -95,17 +95,19 @@ int main()
         {
 
             if ( (strcmp(cat, categories[jj]) == 0) ){ 
-
+                if ( already_answered(&categories[jj], value) ) 
+                { continue;}
             //if category exists, set buffer to *category for display_question
                 printf("I hope you know a lot about %s. We've got %d on the line.\n", categories[jj], value); 
                 j = jj;
+
                 //printf("NOT HERE\n");
             }
            // printf("NOT HERE\n");
         } 
         if (j == -1)
         {
-            printf("Didn't quite catch that. ");
+            printf("Looks like there's a problem. ");
             continue;
         }   //ie, redo the above without executing the below if we cant decipher the input
         
