@@ -160,6 +160,16 @@ break; //this might fix something
 // Returns true if the answer is correct for the question for that category and dollar value
 bool valid_answer(char *category, int value, char *answer)
 {
+
+  	if (answer[strlen(answer)-1] == '\n') { answer[strlen(answer)-1] = '\0'; } //remove newline     
+	char *p = strtok(answer, " ");
+    if ( !(strcmp(&p, "WHO") || strcmp(&p, "WHAT") ) ) { return false;printf("YES %s\n", p); }
+    p = strtok(NULL, " ");
+    if ( !strcmp(&p, "IS") ) { return false;printf("YES %s\n", p); }
+    p = strtok(NULL, " ");
+    strcpy(answer, p);
+   // printf("YES %s\n", answer);
+
 for (int i=0; i<NUM_QUESTIONS; i++)
 {
 	if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
@@ -176,6 +186,17 @@ for (int i=0; i<NUM_QUESTIONS; i++)
 // Returns true if the question has already been answered
 bool already_answered(char *category, int value)
 {
+for (int i=0; i<NUM_QUESTIONS; i++)
+{
+	if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
+	{
+		if ( quest[i].answered == false ) 
+		{
+			return false;
+		}
+		else { return true; }
+	}
+}
     // lookup the question and see if it's already been marked as answered
-    return false;
+
 }
