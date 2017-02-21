@@ -30,7 +30,7 @@ int main()
 {
     // An array of 4 players (+1 for offset, as players are secondarily identified as players 1-4)
     player players[NUM_PLAYERS+1];
-    
+    int test = 0;
     int qsleft = NUM_QUESTIONS - 1; //track number of questions left
     
     // Input buffer and and commands
@@ -79,22 +79,34 @@ int main()
     while (1) //actual game part
     {
         j = -1;
+        test = 0;
         value = 0;
         printf("Up to the playing field, we have %s. \n", players[playah].name);
         display_categories();
         fgets(buffer, BUFFER_LEN, stdin);
         //if (valid_answer(&categories[0], 100, buffer)) printf("we're getting somewhere\n");
         buffer[strlen(buffer)-1] = '\0';
+
+    for (int i=0; i<strlen(buffer); i++)
+    {
+        if (buffer[i] == ' ')
+        {
+            test++;
+        }
+    }
+    if (test == 1)
+    {
         token = strtok(buffer, " ");
         strcpy(cat, token);
         token = strtok(NULL, " ");
+        if (atoi(token))
         value = atoi(token);
      //   printf("NOT HERE\n");
-        
+    }
         for(int jj = 0; jj < 3; jj++) 
         {
 
-            if ( (strcmp(cat, categories[jj]) == 0) ){ 
+            if ( (strcmp(cat, categories[jj]) == 0) && (value == 100 || value == 200 || value == 300 || value == 400 ) ){ 
                 if ( already_answered(&categories[jj], value) ) 
                 { continue;}
             //if category exists, set buffer to *category for display_question
@@ -220,7 +232,7 @@ void show_results(player *players)
 void tokenize(char *input, char **token)
 {
   	if (input[strlen(input)-1] == '\n') { input[strlen(input)-1] = '\0'; } //remove newline     
-	char *p = strtok(input, " ");
+	char *p = strtok(input, token);
 	while(p != NULL) {
 	    printf("%s\n", p);
 	    p = strtok(NULL, token);
