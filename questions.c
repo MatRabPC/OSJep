@@ -120,7 +120,7 @@ void display_categories(void)
 {
     // print categories and dollar values for each unanswered question in questions array
     printf("On the menu tonight:\n");
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < NUM_CATEGORIES; i++)
     {
         if (!quest[0+i].answered || !quest[1+i].answered || !quest[2+i].answered || !quest[3+i].answered)
         {
@@ -146,15 +146,15 @@ void display_categories(void)
 void display_question(char *category, int value)
 {
    //printf("%s  %d\n", category, value);
-for (int i=0; i<NUM_QUESTIONS; i++)
-{
-if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
-{
-printf("\033[1;34m\t\t%s\033[0m\n", quest[i].question);
-quest[i].answered = true; //we might as well mark it here
-break; //this might fix something
-}
-}
+    for (int i=0; i<NUM_QUESTIONS; i++)
+    {
+        if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
+        {
+        printf("\033[1;34m\t\t%s\033[0m\n", quest[i].question);
+        quest[i].answered = true; //we might as well mark it here
+        break; //this might fix something
+        }
+    }
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
@@ -169,44 +169,42 @@ bool valid_answer(char *category, int value, char *answer)
             test++;
         }
     }
-    if (! (test == 2) ) {return false;printf("%d", test); }
-  	char *p = strtok(answer, " ");
-    if ( !(strcmp(&p, "WHO") || strcmp(&p, "WHAT") ) ) {printf("YES %s\n", p); return false; }
-    if (p != NULL)
-    p = strtok(NULL, " ");
-    if ( !strcmp(&p, "IS") ) { printf("YES %s\n", p); return false; }
-    if (p != NULL)
-    p = strtok(NULL, " ");
-    strcpy(answer, p);
-   // printf("YES %s\n", answer);
 
-for (int i=0; i<NUM_QUESTIONS; i++)
-{
-	if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
-	{
-		if ( strcmp(quest[i].answer, answer) == 0 ) 
-		{
-			return true;
-		}
-		else { return false; }
-	}
-}
+    if (! (test == 2) ) return false;
+  	char *p = strtok(answer, " ");
+    if ( !(strcmp(&p, "WHO") || strcmp(&p, "WHAT") ) ) return false; 
+    if (p != NULL)  p = strtok(NULL, " ");
+    if ( !strcmp(&p, "IS") ) return false;
+    if (p != NULL)  p = strtok(NULL, " ");
+    strcpy(answer, p);
+
+
+    for (int i=0; i<NUM_QUESTIONS; i++)
+    {
+        if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
+        {
+            if ( strcmp(quest[i].answer, answer) == 0 ) 
+            {
+                return true;
+            }
+            else { return false; }
+        }
+    }
 }
 
 // Returns true if the question has already been answered
 bool already_answered(char *category, int value)
 {
-for (int i=0; i<NUM_QUESTIONS; i++)
-{
-	if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
-	{
-		if ( quest[i].answered == false ) 
-		{
-			return false;
-		}
-		else { return true; }
-	}
-}
-    // lookup the question and see if it's already been marked as answered
+    for (int i=0; i<NUM_QUESTIONS; i++)
+    {
+        if ( ( strcmp(quest[i].category, category) == 0 ) && (quest[i].value == value) )
+        {
+            if ( quest[i].answered == false ) 
+            {
+                return false;
+            }
+            else { return true; }
+        }
+    }
 
 }
