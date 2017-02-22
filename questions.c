@@ -124,7 +124,7 @@ void display_categories(void)
     {
         if (!quest[0+i].answered || !quest[1+i].answered || !quest[2+i].answered || !quest[3+i].answered)
         {
-            printf ("%-5s %-5s\t", categories[i], "for");
+            printf ("%-5s %-5s\t", categories[i], " ");
  
                 for (int j = 0; j < 4; j++)
                 {
@@ -132,7 +132,7 @@ void display_categories(void)
                     {
                         printf("%-2d \t", quest[i*4 +j].value);
                     }
-			else printf("%-2s\t", "ANS");
+			        else printf("%-2s\t", " ");
                 }
         }
         printf("\n"); //this spacing is necessary, it was getting on my nerves
@@ -160,12 +160,22 @@ break; //this might fix something
 // Returns true if the answer is correct for the question for that category and dollar value
 bool valid_answer(char *category, int value, char *answer)
 {
-
-  	if (answer[strlen(answer)-1] == '\n') { answer[strlen(answer)-1] = '\0'; } //remove newline     
-	char *p = strtok(answer, " ");
-    if ( !(strcmp(&p, "WHO") || strcmp(&p, "WHAT") ) ) { return false;printf("YES %s\n", p); }
+    int test = 0;
+    if (answer[strlen(answer)-1] == '\n') { answer[strlen(answer)-1] = '\0'; } //remove newline     
+    for (int i=0; i<strlen(answer); i++)
+    {
+        if (answer[i] == ' ')
+        {
+            test++;
+        }
+    }
+    if (! (test == 2) ) {return false;printf("%d", test); }
+  	char *p = strtok(answer, " ");
+    if ( !(strcmp(&p, "WHO") || strcmp(&p, "WHAT") ) ) {printf("YES %s\n", p); return false; }
+    if (p != NULL)
     p = strtok(NULL, " ");
-    if ( !strcmp(&p, "IS") ) { return false;printf("YES %s\n", p); }
+    if ( !strcmp(&p, "IS") ) { printf("YES %s\n", p); return false; }
+    if (p != NULL)
     p = strtok(NULL, " ");
     strcpy(answer, p);
    // printf("YES %s\n", answer);
