@@ -13,7 +13,7 @@
 question quest[NUM_QUESTIONS] = {
 
 {
-    "Beatles",
+    "BEATLES",
     "This one was married to Yoko Ono",
     "JOHN",
     100,
@@ -21,7 +21,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Beatles",
+    "BEATLES",
     "This one played bass",
     "PAUL",
     200,
@@ -29,7 +29,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Beatles",
+    "BEATLES",
     "This one died in 1966",
     "PAUL", 
     300,
@@ -37,7 +37,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Beatles",
+    "BEATLES",
     "This one lifts 850 times its body mass",
     "HERCULES",
     400,
@@ -45,14 +45,14 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Insects",
+    "INSECTS",
     "This one spins a web",
     "SPIDER",
     100,
     false
 },
 {
-    "Insects",
+    "INSECTS",
     "This one is named after its mode of transportation",
     "FLY",
     200,
@@ -60,7 +60,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Insects",
+    "INSECTS",
     "This one crawls on the ground",
     "WORM",
      300,
@@ -68,7 +68,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Insects",
+    "INSECTS",
     "This one is not margerine and doesn't walk",
     "BUTTERFLY",
     400,
@@ -76,7 +76,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Bugs",
+    "BUGS",
     "Number when page not found",
     "404",
     100,
@@ -84,7 +84,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Bugs",
+    "BUGS",
     "I couldn't think of another one",
 "404",
     200,
@@ -92,7 +92,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Bugs",
+    "BUGS",
      "I couldn't think of one more'",
   "404",
     300,
@@ -100,7 +100,7 @@ question quest[NUM_QUESTIONS] = {
 },
 
 {
-    "Bugs",
+    "BUGS",
     "Name in Hyrule",
     "ERROR",
     400,
@@ -112,6 +112,11 @@ question quest[NUM_QUESTIONS] = {
 void initialize_game(void)
 {
     // initialize each question struct and assign it to the questions array
+     printf("Welcome to a cheap rendition of jeopardy. I will reluctantly be your host tonght *sigh*.\n"
+	 "Quick rundown of the rules: \n"
+	 "1. To select a quetion, type the category and the value when your turn comes around(i.e, BUGS 200).\n"
+	 "2. Answer in all caps, in 'WHO IS' or 'WHAT IS'. We really don't care which.\n"
+	 "3. Don't expect anything special. Ain't nobody got time for special.\n");
   
 }
 
@@ -122,8 +127,8 @@ void display_categories(void)
     printf("On the menu tonight:\n");
     for (int i = 0; i < NUM_CATEGORIES; i++)
     {
-        if (!quest[0+i].answered || !quest[1+i].answered || !quest[2+i].answered || !quest[3+i].answered)
-        {
+     //   if (!quest[0+i].answered || !quest[1+i].answered || !quest[2+i].answered || !quest[3+i].answered)
+       // {
             printf ("%-5s %-5s\t", categories[i], " ");
  
                 for (int j = 0; j < 4; j++)
@@ -134,7 +139,7 @@ void display_categories(void)
                     }
 			        else printf("%-2s\t", " ");
                 }
-        }
+        //}
         printf("\n"); //this spacing is necessary, it was getting on my nerves
     }
     
