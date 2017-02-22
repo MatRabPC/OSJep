@@ -94,16 +94,16 @@ int main()
             test++;
         }
     }
+
     if (test == 1)
     {
         token = strtok(buffer, " ");
         strcpy(cat, token);
         token = strtok(NULL, " ");
-        if (atoi(token))
-        value = atoi(token);
+        if (atoi(token))    value = atoi(token);
      //   printf("NOT HERE\n");
     }
-        for(int jj = 0; jj < 3; jj++) 
+        for(int jj = 0; jj < NUM_CATEGORIES; jj++) 
         {
 
             if ( (strcmp(cat, categories[jj]) == 0) && (value == 100 || value == 200 || value == 300 || value == 400 ) ){ 
