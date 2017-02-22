@@ -40,11 +40,7 @@ int main()
     // Display the game introduction and initialize the questions
     initialize_game();
 
-    printf("Welcome to a cheap rendition of jeopardy *sigh*.\n"
-	 "Quick rundown of the rules: \n"
-	 "1. To select a quetion, type the category and the value (i.e, Bugs 200).\n"
-	 "2. Answer in all caps, in 'WHO IS' or 'WHAT IS'. We really don't care which.\n"
-	 "3. Don't expect anything special. Ain't nobody got time for special.\n");
+
 
     printf("\nAll right players, introduce yourselves (and try not to embarrass yourself):\n");
     // Prompt for players names & initialize each of the players in the array
@@ -53,12 +49,12 @@ int main()
         printf("Player %d?\t", i);
         fgets(players[i].name, BUFFER_LEN, stdin);
         
-        while (player_exists(players, i, players[i].name))
+   /*     while (player_exists(players, i, players[i].name))
         {
             printf("Name exists (but I'm pretty sure you knew that). Please be at least sligthly more original.\n");
             fgets(players[i].name, BUFFER_LEN, stdin);
-
-        }
+//excepts that I really dont mind players with the same name, as this is turn based and all 
+        }*/
 
     if (players[i].name[strlen(players[i].name)-1] == '\n') { players[i].name[strlen(players[i].name)-1] = '\0'; } //remove newline     
 	players[i].score = 0; // initialise score to 0
@@ -81,7 +77,7 @@ int main()
         j = -1;
         test = 0;
         value = 0;
-        printf("Up to the playing field, we have %s. \n", players[playah].name);
+        printf("%s? \n", players[playah].name);
         display_categories();
         fgets(buffer, BUFFER_LEN, stdin);
         //if (valid_answer(&categories[0], 100, buffer)) printf("we're getting somewhere\n");
@@ -92,7 +88,7 @@ int main()
         if (buffer[i] == ' ')
         {
             test++;
-        }
+        } //error handling-ish
     }
 
     if (test == 1)
@@ -119,7 +115,7 @@ int main()
         } 
         if (j == -1)
         {
-            printf("Looks like there's a problem. ");
+            printf("Looks like there's a problem. Come again, ");
             continue;
         }   //ie, redo the above without executing the below if we cant decipher the input
         
